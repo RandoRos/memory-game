@@ -18,6 +18,7 @@ module.exports = {
     'react'
   ],
   rules: {
-    '@typescript-eslint/strict-boolean-expressions':'warn'
+    '@typescript-eslint/strict-boolean-expressions':'warn',
+    '@typescript-eslint/no-confusing-void-expression': 'off'
   }
 }

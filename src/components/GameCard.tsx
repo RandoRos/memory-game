@@ -12,11 +12,11 @@ export const GameCard: React.FunctionComponent<Props> = props => {
 
   return (
     <div
-      className={'w-40 h-40 bg-gray-500 text-white'}
+      className={'rounded-lg bg-gradient-to-r from-cyan-500 to-green-600 shadow-xl md:w-40 md:h-40 w-16 h-16 relative opacity-90'}
       onClick={() => { onClick(card.id) }}
     >
       {
-        (card.isOpened) && <img src={card.image} />
+        (card.isOpened || card.isFound) && <img className="object-contain w-full h-full rounded-lg" src={card.image} />
       }
     </div>
   )

@@ -1,51 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { GameCard } from './GameCard'
 
-import { type Card } from '../types'
+import { useGameSetup } from '../hooks/useGameSetup'
+
+import { type PhotoObject } from '../types'
 
 interface Props {
-  photos: string[]
+  photos: PhotoObject[]
+  handleScore: () => void
 }
 
 export const GameBoard: React.FunctionComponent<Props> = props => {
-  const [opened, setOpened] = useState<number[]>([])
-  const [cards, setCards] = useState<Card[]>([])
-  const { photos } = props
-
-  useEffect(() => {
-    const cards: Card[] = photos.map((img, idx) => ({
-      id: idx,
-      image: img,
-      isOpened: false
-    }))
-
-    setCards(cards)
-  }, [photos])
-
-  useEffect(() => {
-    if (opened.length > 1) {
-      setTimeout(() => {
-        setCards(cards.map(item => ({ ...item, isOpened: false })))
-        setOpened([])
-      }, 1000)
-    }
-  }, [opened])
-
-  const handleCardClick = (id: number): void => {
-    if (opened.length < 2) {
-      setOpened([...opened, id])
-      setCards(prevState => prevState.map(item => {
-        if (item.id === id) {
-          return { ...item, isOpened: true }
-        }
-
-        return item
-      }))
-    }
-  }
+  const { photos, handleScore } = props
+  const { cards, handleCardClick } = useGameSetup({ photos, handleScore })
 
   return (
-    <div className='grid grid-cols-4 gap-3 place-items-center'>
+    <div className='grid grid-cols-4 md:grid-cols-8 gap-2 md:gap-3'>
       {
         cards.map(card => (
           <GameCard card={card} key={card.id} onClick={handleCardClick} />

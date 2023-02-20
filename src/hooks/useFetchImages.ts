@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
-import { type ImageResponse, type Photo } from '../types'
+import { type ImageResponse, type Photo, type PhotoObject } from '../types'
 
 const BASE_URL = 'https://api.pexels.com/v1/search'
 
-export const useFetchImages = (): string[] => {
-  const [images, setImages] = React.useState<string[]>([])
+export const useFetchImages = (): PhotoObject[] => {
+  const [images, setImages] = React.useState<PhotoObject[]>([])
 
   const buildUrl = (): URL => {
     const url = new URL(BASE_URL)
     url.searchParams.append('query', 'nature')
     url.searchParams.append('orientation', 'square')
     url.searchParams.append('size', 'small')
-    url.searchParams.append('per_page', '20')
+    url.searchParams.append('per_page', '16')
     return url
   }
 
@@ -24,7 +24,7 @@ export const useFetchImages = (): string[] => {
           }
         })
         const json: ImageResponse = await response.json()
-        setImages(json.photos.map((photo: Photo) => photo.src.medium))
+        setImages(json.photos.map((photo: Photo) => ({ id: photo.id, src: photo.src.small })))
       } catch (error) {
         console.error(error)
       }

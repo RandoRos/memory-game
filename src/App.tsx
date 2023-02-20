@@ -1,14 +1,16 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
 
-function App() {
+import { GameBoard } from './components/GameBoard'
+import { useFetchImages } from './hooks/useFetchImages'
+
+import './App.css'
+
+function App (): React.FunctionComponentElement<unknown> {
+  const photos = useFetchImages()
+
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold">
-        Memory Game
-      </h1>
-    </div>
-  );
+    <GameBoard photos={photos}/>
+  )
 }
 
-export default App;
+export default App

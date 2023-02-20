@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { type ImageResponse, type Photo } from '../types'
 
 const BASE_URL = 'https://api.pexels.com/v1/search'
@@ -15,7 +15,7 @@ export const useFetchImages = (): string[] => {
     return url
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
         const response = await fetch(buildUrl(), {

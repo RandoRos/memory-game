@@ -11,7 +11,7 @@ export const useFetchImages = (): PhotoObject[] => {
     url.searchParams.append('query', 'nature')
     url.searchParams.append('orientation', 'square')
     url.searchParams.append('size', 'small')
-    url.searchParams.append('per_page', '16')
+    url.searchParams.append('per_page', '8')
     return url
   }
 

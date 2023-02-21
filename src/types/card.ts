@@ -15,3 +15,10 @@ export interface Card {
   isOpened: boolean
   isFound: boolean
 }
+
+export interface Player {
+  id: string
+  name: string
+  score: number
+  isTurn: boolean
+}

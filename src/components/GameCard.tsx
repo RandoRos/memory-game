@@ -4,7 +4,7 @@ import { type Card } from '../types'
 
 interface Props {
   card: Card
-  onClick: (e: any) => void
+  onClick: (id: number) => void
 }
 
 export const GameCard: React.FunctionComponent<Props> = props => {
@@ -12,7 +12,7 @@ export const GameCard: React.FunctionComponent<Props> = props => {
 
   return (
     <div
-      className={'rounded-lg bg-gradient-to-r from-cyan-500 to-green-600 shadow-xl md:w-40 md:h-40 w-16 h-16 relative opacity-90'}
+      className={'rounded-lg bg-gradient-to-r from-cyan-500 to-green-600 shadow-xl md:w-40 md:h-40 w-16 h-16 relative opacity-90 cursor-pointer hover:border'}
       onClick={() => { onClick(card.id) }}
     >
       {

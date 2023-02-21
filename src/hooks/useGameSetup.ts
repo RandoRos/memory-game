@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { createCardDeck, checkMatch } from '../utils/gameLogic'
 import { type PhotoObject, type Card } from '../types'
 
 interface Props {
@@ -17,23 +18,6 @@ export const useGameSetup = (props: Props): HookReturn => {
   const [cards, setCards] = useState<Card[]>([])
   const [opened, setOpened] = useState<number[]>([])
 
-  const createDeck = (shuffled: PhotoObject[]): Card[] => {
-    return shuffled.map((img, idx) => ({
-      id: idx,
-      cardId: img.id,
-      image: img.src,
-      isOpened: false,
-      isFound: false
-    }))
-  }
-
-  const setup = (): void => {
-    const duplicated = [...photos, ...photos]
-    const shuffledCards = duplicated.sort(() => Math.random() - 0.5)
-    const deck = createDeck(shuffledCards)
-    setCards(deck)
-  }
-
   const handleCardClick = (id: number): void => {
     if (opened.length < 2) {
       setOpened([...opened, id])
@@ -47,27 +31,16 @@ export const useGameSetup = (props: Props): HookReturn => {
     }
   }
 
-  const checkMatch = (): boolean => {
-    const [first, second] = opened
-    const firstCard = cards.find(item => item.id === first)
-    const secondCard = cards.find(item => item.id === second)
-
-    if ((firstCard != null) && (secondCard != null)) {
-      return firstCard.cardId === secondCard.cardId
-    }
-
-    return false
-  }
-
   useEffect(() => {
     if (photos.length > 0) {
-      setup()
+      const deck = createCardDeck(photos)
+      setCards(deck)
     }
   }, [photos])
 
   useEffect(() => {
     if (opened.length > 1) {
-      const isMatch = checkMatch()
+      const isMatch = checkMatch(cards, opened)
       if (isMatch) {
         setCards(prevState => prevState.map(item => {
           if (item.id === opened[0] || item.id === opened[1]) {

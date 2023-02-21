@@ -13,10 +13,13 @@ export const MainMenu: React.FunctionComponent<Props> = props => {
   }
 
   return (
-    <div className='flex flex-col w-1/2 justify-center'>
-      <MenuButton text='Singleplayer Mode' value="single" onClick={handleClick}/>
-      <MenuButton text='Multiplayer Mode' value="multiplayer" onClick={handleClick}/>
-      <MenuButton text='Leaderboard' value="leaderboard" onClick={handleClick}/>
-    </div>
+    <>
+      <h1 className='text-4xl text-center mb-10'>Memory Game</h1>
+      <div className='flex flex-col w-1/2 justify-center'>
+        <MenuButton text='Singleplayer Mode' value="single" onClick={handleClick}/>
+        <MenuButton text='Multiplayer Mode' value="multiplayer" onClick={handleClick}/>
+        <MenuButton text='Leaderboard' value="leaderboard" onClick={handleClick}/>
+      </div>
+    </>
   )
 }

@@ -13,7 +13,7 @@ export const MenuButton: React.FunctionComponent<Props> = props => {
   return (
     <button
       value={value}
-      className='w-80 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-5 rounded'
+      className='bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-slate-100 w-80 font-bold py-2 px-4 mb-5 rounded shadow-md'
       disabled={disabled}
       onClick={() => onClick(value) }
     >

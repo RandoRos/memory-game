@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { type Socket } from 'socket.io-client'
 import { useGameClientLogic } from '../hooks/useGameClientLogic'
 import { type Card, type Player } from '../types'
+import { PlayerMenu } from './game-components/PlayerMenu'
 import { GameBoard } from './GameBoard'
 
 interface Props {
@@ -28,22 +29,15 @@ export const StartGameClient: React.FunctionComponent<Props> = props => {
   }, [])
 
   return (
-    <div>
+    <div className="text-slate-100">
       {
-        (players.length < 2) && (<div>Waiting for other player...</div>)
+        (players.length < 2) && (<div className="font-bold">Waiting for other player...</div>)
       }
       {
         (players.length >= 2) && (
-        <>
-        {
-          players.map(p => (
-            <div key={p.id} className='flex items-center justify-between space-x-4'>
-              <div>{p.name} <span>{p.isTurn ? '⭐️' : ''}</span></div>
-              <div>{p.score}</div>
-            </div>
-          ))
-          }
-          <GameBoard cards={cards} handleCardClick={handleCardClick} isTurn={turn} />
+          <>
+            <PlayerMenu players={players}/>
+            <GameBoard cards={cards} handleCardClick={handleCardClick} isTurn={turn} />
           </>
         )
       }

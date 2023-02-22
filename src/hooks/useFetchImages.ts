@@ -11,7 +11,8 @@ export const useFetchImages = (): PhotoObject[] => {
     url.searchParams.append('query', 'nature')
     url.searchParams.append('orientation', 'square')
     url.searchParams.append('size', 'small')
-    url.searchParams.append('per_page', '8')
+    url.searchParams.append('per_page', '10')
+    url.searchParams.append('page', Math.floor(Math.random() * 10).toString())
     return url
   }
 
@@ -24,7 +25,7 @@ export const useFetchImages = (): PhotoObject[] => {
           }
         })
         const json: ImageResponse = await response.json()
-        setImages(json.photos.map((photo: Photo) => ({ id: photo.id, src: photo.src.small })))
+        setImages(json.photos.map((photo: Photo) => ({ id: photo.id, src: photo.src.medium })))
       } catch (error) {
         console.error(error)
       }

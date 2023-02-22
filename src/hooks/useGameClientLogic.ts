@@ -13,7 +13,6 @@ export const useGameClientLogic = (props: Props): any => {
   const [opened, setOpened] = useState<number[]>([])
 
   const handleCardClick = (id: number): void => {
-    console.log('click', id)
     if (opened.length < 2) {
       setOpened([...opened, id])
       socket.emit('updateServerCards', cards.map(item => {

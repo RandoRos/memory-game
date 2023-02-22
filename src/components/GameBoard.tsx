@@ -12,17 +12,11 @@ interface Props {
 export const GameBoard: React.FunctionComponent<Props> = props => {
   const { cards, handleCardClick, isTurn } = props
 
-  const handleClick = (id: number): void => {
-    if (isTurn) {
-      handleCardClick(id)
-    }
-  }
-
   return (
-    <div className='grid grid-cols-4 md:auto-cols-auto gap-2 md:gap-3'>
+    <div className='grid grid-cols-4 md:auto-cols-auto md:grid-cols-5 gap-2 md:gap-3'>
       {
         cards?.map(card => (
-          <GameCard card={card} key={card.id} onClick={handleClick} />
+          <GameCard card={card} key={card.id} onClick={handleCardClick} isTurn={isTurn} />
         ))
       }
     </div>

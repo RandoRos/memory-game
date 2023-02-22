@@ -14,7 +14,7 @@ export const MainMenu: React.FunctionComponent<Props> = props => {
 
   return (
     <>
-      <h1 className='text-4xl text-center mb-10'>Memory Game</h1>
+      <h1 className='text-4xl text-center mb-10 text-slate-100 font-bold'>Memory Game</h1>
       <div className='flex flex-col w-1/2 justify-center'>
         <MenuButton text='Singleplayer Mode' value="single" onClick={handleClick}/>
         <MenuButton text='Multiplayer Mode' value="multiplayer" onClick={handleClick}/>

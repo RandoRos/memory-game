@@ -18,7 +18,7 @@ export const MainMenu: React.FunctionComponent<Props> = props => {
       <div className='flex flex-col w-1/2 justify-center'>
         <MenuButton text='Singleplayer Mode' value="single" onClick={handleClick}/>
         <MenuButton text='Multiplayer Mode' value="multiplayer" onClick={handleClick}/>
-        <MenuButton text='Leaderboard' value="leaderboard" onClick={handleClick}/>
+        <MenuButton text='Hall of Fame' value="hall" onClick={handleClick}/>
       </div>
     </>
   )

@@ -13,14 +13,14 @@ export const Multiplayer: React.FunctionComponent = () => {
   const { cards, handleCardClick } = useGameSetup({ photos, handleScore })
 
   const handleCreate = (playerName?: string): void => {
-    const ws = io('http://localhost:8000')
+    const ws = io(process.env.REACT_APP_MEMORY_API ?? '')
     ws.emit('createServer', cards)
     ws.emit('newPlayer', playerName)
     setSocket(ws)
   }
 
   const handleJoin = (playerName?: string, serverId?: string): void => {
-    const ws = io('http://localhost:8000')
+    const ws = io(process.env.REACT_APP_MEMORY_API ?? '')
     ws.emit('newPlayer', playerName)
     setSocket(ws)
   }

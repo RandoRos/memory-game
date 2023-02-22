@@ -5,6 +5,7 @@ import { StartGameLocal } from './components/StartGameLocal'
 import { Multiplayer } from './components/Multiplayer'
 
 import './App.css'
+import { HallOfFame } from './components/HallOfFame'
 
 function App (): React.FunctionComponentElement<unknown> {
   const [mode, setMode] = React.useState<string | null>(null)
@@ -19,12 +20,17 @@ function App (): React.FunctionComponentElement<unknown> {
         }
         {
           (mode === 'single') && (
-            <StartGameLocal players={[{ id: '123', score: 0, name: 'Anon', isTurn: true }]} />
+            <StartGameLocal players={[{ id: '123', score: 0, name: 'Player', isTurn: true }]} />
           )
         }
         {
           (mode === 'multiplayer') && (
             <Multiplayer />
+          )
+        }
+        {
+          (mode === 'hall') && (
+            <HallOfFame />
           )
         }
       </div>

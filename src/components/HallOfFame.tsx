@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 interface TopPlayer {
   name: string
   score: number
+  date: Date
 }
 
 export const HallOfFame: React.FunctionComponent = () => {
@@ -11,12 +12,12 @@ export const HallOfFame: React.FunctionComponent = () => {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_MEMORY_API ?? ''}/api/topPlayers`)
       .then(async response => await response.json())
-      .then(data => setPlayers(data))
+      .then((data: TopPlayer[]) => setPlayers(data.map(item => ({ ...item, date: new Date(item.date) }))))
       .catch(error => console.log(error))
   }, [])
 
   return (
-    <div className="w-72 text-center text-slate-100">
+    <div className="text-center text-slate-100">
       <div className="text-4xl font-bold">Hall of Fame</div>
       <p>Best top 10 players</p>
       <div className="relative overflow-x-auto shadow-md rounded-lg mt-8">
@@ -25,6 +26,7 @@ export const HallOfFame: React.FunctionComponent = () => {
             <tr>
               <th scope="col" className="px-6 py-2">Player name</th>
               <th scope="col" className="px-6 py-2">Score</th>
+              <th scope="col" className="px-6 py-2">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -36,6 +38,9 @@ export const HallOfFame: React.FunctionComponent = () => {
                   </th>
                   <td className="px-6 py-3">
                       { player.score }
+                  </td>
+                  <td className="px-6 py-3 min-w-10">
+                      {`${player.date.getFullYear()}-${player.date.getMonth() + 1}-${player.date.getDate()}`}
                   </td>
                 </tr>
               ))

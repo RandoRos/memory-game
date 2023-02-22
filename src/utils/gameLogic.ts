@@ -1,4 +1,4 @@
-import { type Card, type PhotoObject } from '../types'
+import { type Player, type Card, type PhotoObject } from '../types'
 
 const createDeck = (shuffled: PhotoObject[]): Card[] => {
   return shuffled.map((img, idx) => ({
@@ -27,4 +27,14 @@ export const checkMatch = (cards: Card[], opened: number[]): boolean => {
   }
 
   return false
+}
+
+export const checkWin = (cards: Card[]): boolean => {
+  console.log('isWin?', cards.every(item => item.isFound))
+  return cards.every(item => item.isFound)
+}
+
+export const getWinner = (players: Player[]): Player => {
+  const winner = players.reduce((prev, current) => (prev.score > current.score) ? prev : current)
+  return winner
 }

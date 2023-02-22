@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import io, { type Socket } from 'socket.io-client'
-import { useFetchImages } from '../hooks/useFetchImages'
-import { useGameSetup } from '../hooks/useGameSetup'
+import { useFetchImages, useGameLocalLogic } from '../hooks'
 import { MultiplayerMenu } from './multiplayer/components'
 import { StartGameClient } from './StartGameClient'
 
@@ -10,7 +9,7 @@ export const Multiplayer: React.FunctionComponent = () => {
 
   const handleScore = (): void => {}
   const photos = useFetchImages()
-  const { cards, handleCardClick } = useGameSetup({ photos, handleScore })
+  const { cards } = useGameLocalLogic({ photos, handleScore })
 
   const handleCreate = (playerName?: string): void => {
     const ws = io(process.env.REACT_APP_MEMORY_API ?? '')
@@ -32,7 +31,7 @@ export const Multiplayer: React.FunctionComponent = () => {
       }
       {
         (socket != null) && (
-          <StartGameClient socket={socket} handleCardClick={handleCardClick} />
+          <StartGameClient socket={socket} />
         )
       }
     </>

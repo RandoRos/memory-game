@@ -13,7 +13,7 @@ interface HookReturn {
   handleCardClick: (id: number) => void
 }
 
-export const useGameSetup = (props: Props): HookReturn => {
+export const useGameLocalLogic = (props: Props): HookReturn => {
   const { photos, handleScore } = props
   const [cards, setCards] = useState<Card[]>([])
   const [opened, setOpened] = useState<number[]>([])
